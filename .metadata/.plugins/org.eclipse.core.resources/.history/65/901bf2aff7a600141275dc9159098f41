@@ -1,0 +1,52 @@
+package org.lyd.layermaskview;
+
+import org.lyd.layermaskview.view.FermodeLayout;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.app.Activity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MotionEvent;
+
+public class MainActivity extends Activity {
+	
+	private FermodeLayout mLayout;
+	private Handler handler = new Handler();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		mLayout = (FermodeLayout) findViewById(R.id.fermode);
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}
+		}, 100)
+		mLayout.setRadius(20);
+	}
+	
+	int mLastMotionY;
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		Log.i("log", "onTouchEvent");
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			mLastMotionY = (int) event.getY();
+			break;
+		case MotionEvent.ACTION_MOVE:
+			int delay = (int) (event.getY() - mLastMotionY);
+			Log.i("log", "the delay is:"+delay);
+			if(delay > 0){
+				mLayout.setRadius(50 - delay);
+			}
+			break;
+		}
+		return true;
+	}
+}

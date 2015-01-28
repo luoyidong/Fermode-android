@@ -1,0 +1,7 @@
+package org.lyd.layermaskview.view;
+
+import android.widget.FrameLayout;
+
+public class FermodeLayout extends FrameLayout{
+
+}
